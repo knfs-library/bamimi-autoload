@@ -1,0 +1,24 @@
+{
+  "name": "@knfs-tech/bamimi-autoload",
+  "version": "1.0.0",
+  "description": "Autoload module",
+  "main": "./src/cjs/index.js",
+  "module": "./src/esm/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knfs-jsc/bamimi-autoload.git"
+  },
+  "keywords": [
+    "autoload",
+    "bamimi"
+  ],
+  "author": "Kent Phung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/knfs-jsc/bamimi-autoload/issues"
+  },
+  "homepage": "https://github.com/knfs-jsc/bamimi-autoload#readme"
+}
