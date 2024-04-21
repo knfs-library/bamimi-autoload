@@ -1,9 +1,9 @@
 {
   "name": "@knfs-tech/bamimi-autoload",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Autoload module",
-  "main": "./src/cjs/index.js",
-  "module": "./src/esm/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
