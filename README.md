@@ -62,6 +62,7 @@ It can be understood that variables and values autoloaded are readily available 
 
 **Step 2**: Create file *index.js*
 ```js
+require("@knfs-tech/bamimi-autoload")
 const { createServer } = require('node:http');
 const socket = require("@knfs-tech/bamimi-socket.io")
 const express = require("express");
