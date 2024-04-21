@@ -1,6 +1,6 @@
 {
   "name": "@knfs-tech/bamimi-autoload",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Autoload module",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
