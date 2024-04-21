@@ -25,10 +25,10 @@ yarn add @knfs-tech/bamimi-autoload
 ```json
 {
 	"name": "<name project>",
-	..., // rest info
+	..., 
 	"autoload": {
 		"modules": {
-			"module1": "" //
+			"module1": "" 
 			"module2": "module2"
 		},
 		"packages": {
@@ -38,18 +38,18 @@ yarn add @knfs-tech/bamimi-autoload
 			"configs/config.js": "config"
 		}
 	},
-	..., // rest info
+	...,
 }
 
 ```
 autoload have 3 types and structure in each types is 
-```json
+```js
 {
 	<file_path/package_name/module_name> : <name_param_will_be_used>
 }
 
-// See the example below for better understanding
 ```
+*See the example below for better understanding*
 
 It can be understood that variables and values autoloaded are readily available for immediate use without the need for further import. If these values are assigned with parameters, they can be accessed using the format $_\<param>. Else it is just imported
 
@@ -63,7 +63,7 @@ It can be understood that variables and values autoloaded are readily available 
 **Step 2**: Create file *index.js*
 ```js
 const { createServer } = require('node:http');
-const socket = require("@knfs-tech/bamimi-autoload")
+const socket = require("@knfs-tech/bamimi-socket.io")
 const express = require("express");
 const app = express();
 const server = createServer(app);
