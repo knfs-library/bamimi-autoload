@@ -35,43 +35,49 @@ function load(filePath, baseObject = null) {
 /**
  * Autoload modules
  */
-for (const [file, param] of Object.entries(packageJson.autoload.modules)) {
-	const filePath = path.resolve(PROJECT_ROOT, file);
+if (packageJson.autoload.modules) {
+	for (const [file, param] of Object.entries(packageJson.autoload.modules)) {
+		const filePath = path.resolve(PROJECT_ROOT, file);
 
-	if (!fs.statSync(filePath).isDirectory()) {
-		console.error("autoload modules should be a folder");
-		return;
+		if (!fs.statSync(filePath).isDirectory()) {
+			console.error("autoload modules should be a folder");
+			return;
+		}
+
+		if ("" === param) {
+			load(filePath, {});
+			continue;
+		}
+
+		global[PREFIX_LOAD_PARAM + param] = load(filePath, {});
 	}
-
-	if ("" === param) {
-		load(filePath, {});
-		continue;
-	}
-
-	global[PREFIX_LOAD_PARAM + param] = load(filePath, {});
 }
+
 
 /**
  * Autoload packages
  */
-for (const [package, param] of Object.entries(packageJson.autoload.packages)) {
-	global[PREFIX_LOAD_PARAM + param] = require(package);
+if (packageJson.autoload.packages) {
+	for (const [package, param] of Object.entries(packageJson.autoload.packages)) {
+		global[PREFIX_LOAD_PARAM + param] = require(package);
+	}
 }
-
 /**
  * Autoload files
  */
-for (const [file, param] of Object.entries(packageJson.autoload.files)) {
-	const filePath = path.resolve(PROJECT_ROOT, file);
-	if (!file.endsWith('.js') && !file.endsWith('.json')) {
-		console.error("Only autoload for json file and javascript file");
-		return;
-	}
+if (packageJson.autoload.files) {
+	for (const [file, param] of Object.entries(packageJson.autoload.files)) {
+		const filePath = path.resolve(PROJECT_ROOT, file);
+		if (!file.endsWith('.js') && !file.endsWith('.json')) {
+			console.error("Only autoload for json file and javascript file");
+			return;
+		}
 
-	if ("" === param) {
-		require(filePath);
-		continue;
-	}
+		if ("" === param) {
+			require(filePath);
+			continue;
+		}
 
-	global[PREFIX_LOAD_PARAM + param] = require(filePath);
+		global[PREFIX_LOAD_PARAM + param] = require(filePath);
+	}
 }

@@ -31,40 +31,46 @@ function load(filePath, baseObject = null) {
 }
 
 // Autoload modules
-for (const [file, param] of Object.entries(packageJson.autoload.modules)) {
-	const filePath = resolve(PROJECT_ROOT, file);
+if (packageJson.autoload.modules) {
+	for (const [file, param] of Object.entries(packageJson.autoload.modules)) {
+		const filePath = resolve(PROJECT_ROOT, file);
 
-	if (!statSync(filePath).isDirectory()) {
-		console.error("autoload modules should be a folder");
-		return;
+		if (!statSync(filePath).isDirectory()) {
+			console.error("autoload modules should be a folder");
+			return;
+		}
+
+		if ("" === param) {
+			load(filePath, {});
+			continue;
+		}
+
+		global[PREFIX_LOAD_PARAM + param] = load(filePath, {});
 	}
-
-	if ("" === param) {
-		load(filePath, {});
-		continue;
-	}
-
-	global[PREFIX_LOAD_PARAM + param] = load(filePath, {});
 }
 
 // Autoload packages
-for (const [packagePath, param] of Object.entries(packageJson.autoload.packages)) {
-	global[PREFIX_LOAD_PARAM + param] = await import(packagePath);
-
+if (packageJson.autoload.packages) {
+	for (const [packagePath, param] of Object.entries(packageJson.autoload.packages)) {
+		global[PREFIX_LOAD_PARAM + param] = await import(packagePath);
+	}
 }
 
 // Autoload files
-for (const [filePath, param] of Object.entries(packageJson.autoload.files)) {
-	const resolvedPath = resolve(PROJECT_ROOT, filePath);
-	if (!filePath.endsWith('.js') && !filePath.endsWith('.json')) {
-		console.error("Only autoload for json file and javascript file");
-		return;
-	}
+if (packageJson.autoload.files) {
+	for (const [filePath, param] of Object.entries(packageJson.autoload.files)) {
+		const resolvedPath = resolve(PROJECT_ROOT, filePath);
+		if (!filePath.endsWith('.js') && !filePath.endsWith('.json')) {
+			console.error("Only autoload for json file and javascript file");
+			return;
+		}
 
-	if ("" === param) {
-		await import(resolvedPath);
-		continue;
-	}
+		if ("" === param) {
+			await import(resolvedPath);
+			continue;
+		}
 
-	global[PREFIX_LOAD_PARAM + param] = await import(resolvedPath);
+		global[PREFIX_LOAD_PARAM + param] = await import(resolvedPath);
+	}
 }
+
