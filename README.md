@@ -21,7 +21,6 @@ This is a package that helps you autoload files without having to re-import them
 ---
 
 ## Install
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fknfs-jsc%2Fbamimi-autoload.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fknfs-jsc%2Fbamimi-autoload?ref=badge_shield)
 
 ```bash
 npm i @knfs-tech/bamimi-autoload
