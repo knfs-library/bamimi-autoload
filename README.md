@@ -73,7 +73,6 @@ It can be understood that variables and values autoloaded are readily available 
 ```js
 require("@knfs-tech/bamimi-autoload")
 const { createServer } = require('node:http');
-const socket = require("@knfs-tech/bamimi-socket.io")
 const express = require("express");
 const app = express();
 const server = createServer(app);
